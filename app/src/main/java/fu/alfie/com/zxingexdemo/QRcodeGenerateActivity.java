@@ -37,64 +37,32 @@ public class QRcodeGenerateActivity extends AppCompatActivity {
 
         source_text = getIntent().getStringExtra("source_text");
 
-        String[] encodeType = {"EAN_8", "EAN_13", "CODE_39", "CODE_93", "CODE_128", "ITF", "PDF_417", "CODABAR", "UPC_A", "UPC_E", "UPC_EAN_EXTENSION", "DATA_MATRIX", "AZTEC", "RSS_14", "RSS_EXPANDED", "MAXICODE", "QR_CODE"};
+        String[] encodeType = {/*"CODE_39", "CODE_93",*/ "CODE_128", "CODE_128B", "QR_CODE"};
         Spinner spinner = (Spinner)findViewById(R.id.spinner) ;
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,encodeType);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-        spinner.setSelection(encodeType.length-1, true);
+        spinner.setSelection(0);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
                 switch (item){
-                    case "EAN_8":
-                        codeGenerate(source_text, BarcodeFormat.EAN_8, 900, 300);
-                        break;
-                    case "EAN_13":
-                        codeGenerate(source_text, BarcodeFormat.EAN_13, 900, 300);
-                        break;
-                    case "CODE_39":
-                        codeGenerate(source_text, BarcodeFormat.CODE_39, 900, 300);
-                        break;
-                    case "CODE_93":
-                        codeGenerate(source_text, BarcodeFormat.CODE_93, 900, 300);
-                        break;
+//                    case "CODE_39":
+//                        codeGenerate(source_text, BarcodeFormat.CODE_39, 900, 300);
+//                        break;
+//                    case "CODE_93":
+//                        codeGenerate(source_text, BarcodeFormat.CODE_93, 900, 300);
+//                        break;
                     case "CODE_128":
                         codeGenerate(source_text, BarcodeFormat.CODE_128, 900, 300);
                         break;
-                    case "ITF":
-                        codeGenerate(source_text, BarcodeFormat.ITF, 900, 300);
-                        break;
-                    case "PDF_417":
-                        codeGenerate(source_text, BarcodeFormat.PDF_417, 900, 300);
-                        break;
-                    case "CODABAR":
-                        codeGenerate(source_text, BarcodeFormat.CODABAR, 900, 300);
-                        break;
-                    case "UPC_A":
-                        codeGenerate(source_text, BarcodeFormat.UPC_A, 900, 300);
-                        break;
-                    case "UPC_E":
-                        codeGenerate(source_text, BarcodeFormat.UPC_E, 900, 300);
-                        break;
-                    case "UPC_EAN_EXTENSION":
-                        codeGenerate(source_text, BarcodeFormat.UPC_EAN_EXTENSION, 900, 300);
-                        break;
-                    case "DATA_MATRIX":
-                        codeGenerate(source_text, BarcodeFormat.DATA_MATRIX, 900, 300);
-                        break;
-                    case "AZTEC":
-                        codeGenerate(source_text, BarcodeFormat.AZTEC, 900, 300);
-                        break;
-                    case "MAXICODE":
-                        codeGenerate(source_text, BarcodeFormat.MAXICODE, 900, 300);
-                        break;
-                    case "RSS_14":
-                        codeGenerate(source_text, BarcodeFormat.RSS_14, 900, 300);
-                        break;
-                    case "RSS_EXPANDED":
-                        codeGenerate(source_text, BarcodeFormat.RSS_EXPANDED, 900, 300);
+                    case "CODE_128B":
+                        Code128 code = new Code128(QRcodeGenerateActivity.this);
+                        code.setData(source_text);
+                        Bitmap bitmap = code.getBitmap(900, 300);
+                        ImageView ivBarcode = (ImageView)findViewById(R.id.imageView);
+                        ivBarcode.setImageBitmap(bitmap);
                         break;
                     case "QR_CODE":
                         codeGenerate(source_text, BarcodeFormat.QR_CODE, 500, 500);
@@ -124,7 +92,6 @@ public class QRcodeGenerateActivity extends AppCompatActivity {
     private void codeGenerate(String source_text,BarcodeFormat type, int width, int height) {
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         try {
-            // ZXing 還可以生成其他形式條碼，如：BarcodeFormat.CODE_39、BarcodeFormat.CODE_93、BarcodeFormat.CODE_128、BarcodeFormat.EAN_8、BarcodeFormat.EAN_13
             imageView.setImageBitmap(encodeAsBitmap(source_text, type, width, height));
         } catch (WriterException e) {
             e.printStackTrace();

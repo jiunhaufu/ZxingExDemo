@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        source_text = "HELLO123456789WORLD";
+        source_text = "A123456789";
     }
 
     public void onQRcodeGenerateClick(View view){

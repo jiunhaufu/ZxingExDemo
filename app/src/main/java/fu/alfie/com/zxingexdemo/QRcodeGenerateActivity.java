@@ -13,15 +13,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
 
 import static fu.alfie.com.zxingexdemo.ZxingUtil.encodeAsBitmap;
 
@@ -37,23 +29,23 @@ public class QRcodeGenerateActivity extends AppCompatActivity {
 
         source_text = getIntent().getStringExtra("source_text");
 
-        String[] encodeType = {/*"CODE_39", "CODE_93",*/ "CODE_128", "CODE_128B", "QR_CODE"};
+        String[] encodeType = {"CODE_39", "CODE_93", "CODE_128", "CODE_128B", "QR_CODE"};
         Spinner spinner = (Spinner)findViewById(R.id.spinner) ;
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,encodeType);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-        spinner.setSelection(0);
+//        spinner.setSelection(0);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
                 switch (item){
-//                    case "CODE_39":
-//                        codeGenerate(source_text, BarcodeFormat.CODE_39, 900, 300);
-//                        break;
-//                    case "CODE_93":
-//                        codeGenerate(source_text, BarcodeFormat.CODE_93, 900, 300);
-//                        break;
+                    case "CODE_39":
+                        codeGenerate(source_text, BarcodeFormat.CODE_39, 900, 300);
+                        break;
+                    case "CODE_93":
+                        codeGenerate(source_text, BarcodeFormat.CODE_93, 900, 300);
+                        break;
                     case "CODE_128":
                         codeGenerate(source_text, BarcodeFormat.CODE_128, 900, 300);
                         break;

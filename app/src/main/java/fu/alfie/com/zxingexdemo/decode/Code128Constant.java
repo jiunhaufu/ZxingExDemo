@@ -1,4 +1,4 @@
-package fu.alfie.com.zxingexdemo;
+package fu.alfie.com.zxingexdemo.decode;
 
 /**
  * Created by Jiunhau.Fu on 2017/10/24.

@@ -19,10 +19,18 @@
         </activity>
         <activity android:name=".QRcodeGenerateActivity"></activity>
 
+        <!-- 設定掃描視窗為直向 -->
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
+
+        <!-- 设置二维码扫描界面方向为竖屏 -->
+        <activity
+            android:name=".custom_view.CustomCaptureActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <!--https://github.com/sinawangnan7/QRCodeScanDemo 提供-->
 
     </application>
 

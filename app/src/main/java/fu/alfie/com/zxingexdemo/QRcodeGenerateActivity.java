@@ -1,7 +1,6 @@
 package fu.alfie.com.zxingexdemo;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +13,8 @@ import android.widget.Spinner;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
+
+import fu.alfie.com.zxingexdemo.decode.Code128;
 
 import static fu.alfie.com.zxingexdemo.ZxingUtil.encodeAsBitmap;
 
